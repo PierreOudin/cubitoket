@@ -1,4 +1,4 @@
-import 'package:cubitoket/features/auth/presentation/views/recoverypwd/recover_pwd_message.dart';
+import 'package:cubitoket/features/auth/presentation/recoverypwd/view/recover_pwd_message.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 

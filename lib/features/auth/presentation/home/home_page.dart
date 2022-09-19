@@ -1,5 +1,5 @@
-import 'package:cubitoket/features/auth/presentation/views/login/login_page.dart';
-import 'package:cubitoket/features/auth/presentation/views/signup/sign_up_page.dart';
+import 'package:cubitoket/features/auth/presentation/login/view/login_page.dart';
+import 'package:cubitoket/features/auth/presentation/signup/view/sign_up_page.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
