@@ -22,8 +22,8 @@ class HomePage extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              Expanded(
-                child: const Image(
+              const Expanded(
+                child: Image(
                   image: AssetImage("assets/images/800px-Qulbutoké-HGSS.png"),
                   height: 200,
                 ),
@@ -38,10 +38,11 @@ class HomePage extends StatelessWidget {
                     minimumSize: const Size.fromHeight(80),
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(50)),
-                    textStyle: TextStyle(color: Colors.white, fontSize: 30)),
+                    textStyle:
+                        const TextStyle(color: Colors.white, fontSize: 30)),
                 child: const Text("Connexion"),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               ElevatedButton(
@@ -54,7 +55,8 @@ class HomePage extends StatelessWidget {
                     minimumSize: const Size.fromHeight(80),
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(50)),
-                    textStyle: TextStyle(color: Colors.white, fontSize: 30)),
+                    textStyle:
+                        const TextStyle(color: Colors.white, fontSize: 30)),
                 child: const Text("Inscription"),
               )
             ],
