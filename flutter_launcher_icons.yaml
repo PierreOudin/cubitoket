@@ -1,0 +1,14 @@
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/images/800px-Qulbutoké-HGSS.png"
+  min_sdk_android: 21 # android min sdk min:16, default 21
+  web:
+    generate: true
+    image_path: "assets/images/800px-Qulbutoké-HGSS.png"
+    background_color: "#c78e08"
+    theme_color: "#0465db"
+  windows:
+    generate: true
+    image_path: "assets/images/800px-Qulbutoké-HGSS.png"
+    icon_size: 48 # min:48, max:256, default: 48
