@@ -1,3 +1,5 @@
+import 'package:cubitoket/features/auth/presentation/views/login/login_page.dart';
+import 'package:cubitoket/features/auth/presentation/views/signup/sign_up_page.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
@@ -28,8 +30,8 @@ class HomePage extends StatelessWidget {
               ),
               ElevatedButton(
                 onPressed: () {
-                  /*Navigator.of(context).push(MaterialPageRoute(
-                      builder: ((context) {=> const LoginPage()})));*/
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: ((context) => const LoginPage())));
                 },
                 style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xff5fcbf8),
@@ -44,8 +46,8 @@ class HomePage extends StatelessWidget {
               ),
               ElevatedButton(
                 onPressed: () {
-                  /*Navigator.of(context).push(MaterialPageRoute(
-                      builder: ((context) => const SignUpPage())));*/
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: ((context) => const SignUpPage())));
                 },
                 style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xff003049),
