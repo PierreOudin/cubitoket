@@ -1,5 +1,9 @@
+import 'package:cubitoket/features/auth/domain/usecases/login/login_usecase.dart';
+import 'package:cubitoket/features/auth/presentation/login/cubit/login_cubit.dart';
 import 'package:cubitoket/features/auth/presentation/recoverypwd/view/recover_pwd_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class LoginPage extends StatefulWidget {
@@ -11,6 +15,8 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   bool _fieldVisible = false;
+  final emailTextController = TextEditingController();
+  final passwordTextController = TextEditingController();
 
   @override
   void initState() {
@@ -20,6 +26,7 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    final loginCubit = Modular.get<LoginCubit>();
     return Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
@@ -77,17 +84,67 @@ class _LoginPageState extends State<LoginPage> {
                   const SizedBox(
                     height: 40,
                   ),
-                  ElevatedButton(
-                    onPressed: () {},
-                    style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xffD62828),
-                        minimumSize: const Size.fromHeight(80),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(50)),
-                        textStyle:
-                            const TextStyle(color: Colors.white, fontSize: 30)),
-                    child: const Text("Connexion"),
-                  ),
+                  BlocProvider(
+                      create: (context) => loginCubit,
+                      child: BlocBuilder<LoginCubit, LoginState>(
+                        builder: (context, state) {
+                          if (state is LoginInitial) {
+                            return ElevatedButton(
+                              onPressed: () {},
+                              style: ElevatedButton.styleFrom(
+                                  backgroundColor: const Color(0xffD62828),
+                                  minimumSize: const Size.fromHeight(80),
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(50)),
+                                  textStyle: const TextStyle(
+                                      color: Colors.white, fontSize: 30)),
+                              child: const Text("Connexion"),
+                            );
+                          }
+                          if (state is LoginLoading) {
+                            return ElevatedButton(
+                              onPressed: () {},
+                              style: ElevatedButton.styleFrom(
+                                  backgroundColor: const Color(0xffD62828),
+                                  minimumSize: const Size.fromHeight(80),
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(50)),
+                                  textStyle: const TextStyle(
+                                      color: Colors.white, fontSize: 30)),
+                              child: const Center(
+                                child: CircularProgressIndicator(),
+                              ),
+                            );
+                          }
+                          if (state is LoginLoaded) {
+                            return Center(
+                              child: Column(
+                                children: [
+                                  Image.asset(
+                                    "assets/images/800px-Qulbutoké-HGSS.png",
+                                    width: 100,
+                                  ),
+                                  Text(state.jwtTokenEntity.jwt)
+                                ],
+                              ),
+                            );
+                          }
+                          if (state is LoginError) {
+                            return Text(state.error);
+                          }
+                          return ElevatedButton(
+                            onPressed: () {},
+                            style: ElevatedButton.styleFrom(
+                                backgroundColor: const Color(0xffD62828),
+                                minimumSize: const Size.fromHeight(80),
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(50)),
+                                textStyle: const TextStyle(
+                                    color: Colors.white, fontSize: 30)),
+                            child: const Text("Connexion"),
+                          );
+                        },
+                      )),
                   const SizedBox(
                     height: 20,
                   ),
@@ -135,11 +192,7 @@ class _LoginPageState extends State<LoginPage> {
 
   Widget _buildEmailFormWidget() {
     return TextFormField(
-      initialValue: "",
-      onChanged: ((value) {}),
-      validator: (_) {
-        return null;
-      },
+      controller: emailTextController,
       decoration: const InputDecoration(
         labelText: 'Email',
         labelStyle: TextStyle(color: Colors.black),
@@ -155,14 +208,10 @@ class _LoginPageState extends State<LoginPage> {
 
   Widget _buildPasswordFormWidget() {
     return TextFormField(
-      initialValue: "",
-      onChanged: ((value) {}),
+      controller: passwordTextController,
       obscureText: !_fieldVisible,
       enableSuggestions: false,
       autocorrect: false,
-      validator: (_) {
-        return null;
-      },
       decoration: InputDecoration(
           labelText: 'Password',
           labelStyle: const TextStyle(color: Colors.black),

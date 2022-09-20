@@ -1,11 +1,12 @@
 import 'package:cubitoket/features/auth/domain/entities/api_status_entities.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:equatable/equatable.dart';
 
-part 'jwt_token_entities.freezed.dart';
+class JwtTokenEntity extends Equatable {
+  final String jwt;
+  final ApiStatusEntity status;
 
-@freezed
-class JwtTokenEntities with _$JwtTokenEntities {
-  const factory JwtTokenEntities(
-      {required ApiStatusEntities status,
-      required String jwt}) = _JwtTokenEntities;
+  const JwtTokenEntity({required this.jwt, required this.status});
+
+  @override
+  List<Object?> get props => [];
 }

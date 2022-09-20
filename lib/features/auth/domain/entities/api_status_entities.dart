@@ -1,8 +1,10 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:equatable/equatable.dart';
 
-part 'api_status_entities.freezed.dart';
+class ApiStatusEntity extends Equatable {
+  final bool status;
 
-@freezed
-class ApiStatusEntities with _$ApiStatusEntities {
-  const factory ApiStatusEntities({required bool status}) = _ApiStatusEntities;
+  const ApiStatusEntity({required this.status});
+
+  @override
+  List<Object?> get props => [];
 }

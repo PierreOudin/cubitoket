@@ -1,6 +1,13 @@
-import 'package:cubitoket/features/auth/auth.dart';
+import 'package:cubitoket/app_module.dart';
+import 'package:cubitoket/app_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 void main() {
-  runApp(const AuthApp());
+  runApp(
+    ModularApp(
+      module: AppModule(),
+      child: const AppWidget(),
+    ),
+  );
 }
