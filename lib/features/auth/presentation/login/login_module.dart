@@ -25,9 +25,5 @@ class LoginModule extends Module {
       "/",
       child: (context, args) => const LoginPage(),
     ),
-    ModuleRoute(
-      AppRoutes.recoverpwd,
-      module: LoginModule(),
-    ),
   ];
 }

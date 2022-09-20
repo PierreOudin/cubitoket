@@ -11,6 +11,7 @@ class LoginCubit extends Cubit<LoginState> {
   LoginCubit(this.loginUseCase) : super(LoginInitial());
 
   void getToken(String email, String password) async {
+    print("LoginCubit.getToken $email $password");
     emit(LoginLoading());
     final failureOrSuccess = await loginUseCase(email, password);
     emit(failureOrSuccess.fold((failure) => LoginError(failure.toString()),

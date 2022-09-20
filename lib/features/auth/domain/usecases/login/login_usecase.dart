@@ -10,6 +10,7 @@ class LoginUseCase {
 
   Future<Either<Failure, JwtTokenEntity>> call(
       String email, String password) async {
-    return await repository.getToken(email, password);
+    print("LoginUseCase");
+    return repository.getToken(email, password);
   }
 }

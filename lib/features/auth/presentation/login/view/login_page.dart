@@ -40,7 +40,7 @@ class _LoginPageState extends State<LoginPage> {
           ),
           title: const Image(
             image: AssetImage("assets/images/800px-Qulbutoké-HGSS.png"),
-            width: 60,
+            height: 40,
           ),
           elevation: 0,
           centerTitle: true,
@@ -84,36 +84,37 @@ class _LoginPageState extends State<LoginPage> {
                   const SizedBox(
                     height: 40,
                   ),
+                  ElevatedButton(
+                    onPressed: () {
+                      loginCubit.getToken(emailTextController.text,
+                          passwordTextController.text);
+                    },
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xffD62828),
+                        minimumSize: const Size.fromHeight(80),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(50)),
+                        textStyle:
+                            const TextStyle(color: Colors.white, fontSize: 30)),
+                    child: Text("Connexion"),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  InkWell(
+                    child: const Text(
+                      "Pas encore de compte ?",
+                      style: TextStyle(color: Color(0xffF77F00)),
+                    ),
+                    onTap: () {},
+                  ),
                   BlocProvider(
                       create: (context) => loginCubit,
                       child: BlocBuilder<LoginCubit, LoginState>(
                         builder: (context, state) {
-                          if (state is LoginInitial) {
-                            return ElevatedButton(
-                              onPressed: () {},
-                              style: ElevatedButton.styleFrom(
-                                  backgroundColor: const Color(0xffD62828),
-                                  minimumSize: const Size.fromHeight(80),
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(50)),
-                                  textStyle: const TextStyle(
-                                      color: Colors.white, fontSize: 30)),
-                              child: const Text("Connexion"),
-                            );
-                          }
                           if (state is LoginLoading) {
-                            return ElevatedButton(
-                              onPressed: () {},
-                              style: ElevatedButton.styleFrom(
-                                  backgroundColor: const Color(0xffD62828),
-                                  minimumSize: const Size.fromHeight(80),
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(50)),
-                                  textStyle: const TextStyle(
-                                      color: Colors.white, fontSize: 30)),
-                              child: const Center(
-                                child: CircularProgressIndicator(),
-                              ),
+                            return const Center(
+                              child: CircularProgressIndicator(),
                             );
                           }
                           if (state is LoginLoaded) {
@@ -132,29 +133,9 @@ class _LoginPageState extends State<LoginPage> {
                           if (state is LoginError) {
                             return Text(state.error);
                           }
-                          return ElevatedButton(
-                            onPressed: () {},
-                            style: ElevatedButton.styleFrom(
-                                backgroundColor: const Color(0xffD62828),
-                                minimumSize: const Size.fromHeight(80),
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(50)),
-                                textStyle: const TextStyle(
-                                    color: Colors.white, fontSize: 30)),
-                            child: const Text("Connexion"),
-                          );
+                          return Container();
                         },
                       )),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  InkWell(
-                    child: const Text(
-                      "Pas encore de compte ?",
-                      style: TextStyle(color: Color(0xffF77F00)),
-                    ),
-                    onTap: () {},
-                  ),
                 ],
               ),
               const Expanded(

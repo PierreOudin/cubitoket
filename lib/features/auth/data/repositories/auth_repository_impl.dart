@@ -12,19 +12,16 @@ import 'package:dio/dio.dart';
 
 class AuthRepositoryImpl implements AuthRepository {
   var dio = Dio();
-  final String _baseUri = "localhost:80";
+  final String _baseUri = "http://10.0.2.2:80";
 
   @override
   Future<Either<Failure, JwtTokenEntity>> getToken(
       String email, String password) async {
-    try {
-      final response = await dio.post("$_baseUri/login",
-          data: LoginRequestModel(email: email, password: password).toJson());
-      return Right(
-          LoginResponseModel.fromJson(response as Map<String, dynamic>));
-    } on ServerException {
-      return Left(ServerFailure());
-    } catch (e) {
+    final response = await dio.post("$_baseUri/auth/login",
+        data: {'email': email, 'password': password});
+    if (response.data['status'] == true) {
+      return Right(LoginResponseModel.fromJson(response.data));
+    } else {
       return Left(ServerFailure());
     }
   }
@@ -33,7 +30,7 @@ class AuthRepositoryImpl implements AuthRepository {
   Future<Either<Failure, ApiStatusEntity>> addUser(String firstname,
       String lastname, String email, String phone, String password) async {
     try {
-      final response = await dio.post("$_baseUri/signup",
+      final response = await dio.post("$_baseUri/auth/signup",
           data: SignUpRequestModel(
                   firstname: firstname,
                   lastname: lastname,
